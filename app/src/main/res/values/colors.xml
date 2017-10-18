@@ -3,5 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-        <color name="black_alpha_5">#FFFFFF</color>
+    <color name="black_alpha_5">#ffefefef</color>
+    <color name="tab_selected_line_def">#ff007dff</color>
+    <color name="tab_text_selected_def">#ff007dff</color>
+    <color name="tab_text_normal_def">#ff000000</color>
+    <color name="background_fcfcfc">#fffcfcfc</color>
+    <color name="blue_text_007dff">#ff007dff</color>
 </resources>

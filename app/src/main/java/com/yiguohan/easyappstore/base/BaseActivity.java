@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private ViewGroup title_bar;
+    protected ViewGroup title_bar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,25 +55,24 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected void setStatus() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //设置状态栏透明
+
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //设置导航栏透明
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-
             title_bar = (ViewGroup) findViewById(R.id.bar_layout);
-            title_bar.setBackgroundResource(R.color.black_alpha_5);
+            if (title_bar != null) {
+                title_bar.setBackgroundResource(R.color.black_alpha_5);
+                final int statusBarHeight = getStatusBarHeight();
+                title_bar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int height = title_bar.getHeight();
+                        ViewGroup.LayoutParams params = title_bar.getLayoutParams();
+                        params.height = statusBarHeight + height;
+                        title_bar.setLayoutParams(params);
+                    }
+                });
+            }
 
-            final int statusBarHeight = getStatusBarHeight();
-            title_bar.post(new Runnable() {
-                @Override
-                public void run() {
-                    int height = title_bar.getHeight();
-                    ViewGroup.LayoutParams params = title_bar.getLayoutParams();
-
-                    params.height = statusBarHeight + height;
-                    title_bar.setLayoutParams(params);
-                }
-            });
         }
     }
 
